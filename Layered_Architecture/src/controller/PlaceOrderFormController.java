@@ -324,6 +324,7 @@ public class PlaceOrderFormController {
         try {
             connection=DBConnection.getDbConnection().getConnection();
 
+            //Check order id already exist or not
             OrderDAOImpl orderDAO = new OrderDAOImpl();
             boolean b1 = orderDAO.existOrder(orderId);
             /*if order id already exist*/
@@ -333,6 +334,7 @@ public class PlaceOrderFormController {
 
             connection.setAutoCommit(false);
 
+            //Save the Order to the order table
             OrderDAOImpl orderDAO1 = new OrderDAOImpl();
             boolean b2 = orderDAO1.saveOrder(new OrderDTO(orderId, orderDate, customerId));
 
