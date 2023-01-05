@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import dao.CustomerDAOImpl;
 import dao.ItemDAOImpl;
+import dao.OrderDAOImpl;
 import db.DBConnection;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -190,11 +191,8 @@ public class PlaceOrderFormController {
 
     public String generateNewOrderId() {
         try {
-            Connection connection = DBConnection.getDbConnection().getConnection();
-            Statement stm = connection.createStatement();
-            ResultSet rst = stm.executeQuery("SELECT oid FROM `Orders` ORDER BY oid DESC LIMIT 1;");
-
-            return rst.next() ? String.format("OID-%03d", (Integer.parseInt(rst.getString("oid").replace("OID-", "")) + 1)) : "OID-001";
+            OrderDAOImpl orderDAO = new OrderDAOImpl();
+            return orderDAO.generateOID();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new order id").show();
         } catch (ClassNotFoundException e) {
@@ -322,12 +320,11 @@ public class PlaceOrderFormController {
         /*Transaction*/
         Connection connection = null;
         try {
-            connection = DBConnection.getDbConnection().getConnection();
-            PreparedStatement stm = connection.prepareStatement("SELECT oid FROM `Orders` WHERE oid=?");
-            stm.setString(1, orderId);
+            OrderDAOImpl orderDAO = new OrderDAOImpl();
+            boolean b1 = orderDAO.existOrder(orderId);
             /*if order id already exist*/
-            if (stm.executeQuery().next()) {
-
+            if (b1) {
+                return false;
             }
 
             connection.setAutoCommit(false);
