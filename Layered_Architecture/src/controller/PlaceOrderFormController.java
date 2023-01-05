@@ -99,12 +99,12 @@ public class PlaceOrderFormController {
                 try {
                     try {
                         if (!existCustomer(newValue + "")) {
-                           //"There is no such customer associated with the id " + id
+                            //"There is no such customer associated with the id " + id
                             new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + newValue + "").show();
                         }
                         //Search Customer
                         CustomerDAOImpl customerDAO = new CustomerDAOImpl();
-                        CustomerDTO customerDTO =customerDAO.searchCustomer(newValue+"");
+                        CustomerDTO customerDTO = customerDAO.searchCustomer(newValue + "");
                         txtCustomerName.setText(customerDTO.getName());
 
                     } catch (SQLException e) {
@@ -133,7 +133,7 @@ public class PlaceOrderFormController {
 
                     //Search Item
                     ItemDAOImpl itemDAO = new ItemDAOImpl();
-                    ItemDTO item =itemDAO.searchItem(newItemCode + "");
+                    ItemDTO item = itemDAO.searchItem(newItemCode + "");
 
                     txtDescription.setText(item.getDescription());
                     txtUnitPrice.setText(item.getUnitPrice().setScale(2).toString());
@@ -178,17 +178,13 @@ public class PlaceOrderFormController {
     }
 
     private boolean existItem(String code) throws SQLException, ClassNotFoundException {
-        Connection connection = DBConnection.getDbConnection().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT code FROM Item WHERE code=?");
-        pstm.setString(1, code);
-        return pstm.executeQuery().next();
+        ItemDAOImpl itemDAO = new ItemDAOImpl();
+        return itemDAO.existItem(code);
     }
 
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        Connection connection = DBConnection.getDbConnection().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT id FROM Customer WHERE id=?");
-        pstm.setString(1, id);
-        return pstm.executeQuery().next();
+        CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+        return customerDAO.existCustomer(id);
     }
 
     public String generateNewOrderId() {
@@ -295,7 +291,7 @@ public class PlaceOrderFormController {
         for (OrderDetailTM detail : tblOrderDetails.getItems()) {
             total = total.add(detail.getTotal());
         }
-        lblTotal.setText("Total: " +total);
+        lblTotal.setText("Total: " + total);
     }
 
     private void enableOrDisablePlaceOrderButton() {
