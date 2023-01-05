@@ -3,6 +3,7 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import dao.CustomerDAOImpl;
 import dao.ItemDAOImpl;
 import dao.OrderDAOImpl;
@@ -21,6 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.CustomerDTO;
 import model.ItemDTO;
+import model.OrderDTO;
 import model.OrderDetailDTO;
 import view.tdm.OrderDetailTM;
 
@@ -331,12 +333,10 @@ public class PlaceOrderFormController {
 
             connection.setAutoCommit(false);
 
-            stm = connection.prepareStatement("INSERT INTO `Orders` (oid, date, customerID) VALUES (?,?,?)");
-            stm.setString(1, orderId);
-            stm.setDate(2, Date.valueOf(orderDate));
-            stm.setString(3, customerId);
+            OrderDAOImpl orderDAO1 = new OrderDAOImpl();
+            boolean b2 = orderDAO1.saveOrder(new OrderDTO(orderId, orderDate, customerId));
 
-            if (stm.executeUpdate() != 1) {
+            if (!b2) {
                 connection.rollback();
                 connection.setAutoCommit(true);
                 return false;
