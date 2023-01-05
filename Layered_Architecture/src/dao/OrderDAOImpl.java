@@ -1,6 +1,7 @@
 package dao;
 
 import db.DBConnection;
+import model.OrderDTO;
 
 import java.sql.*;
 
@@ -18,6 +19,15 @@ public class OrderDAOImpl {
         PreparedStatement stm = connection.prepareStatement("SELECT oid FROM `Orders` WHERE oid=?");
         stm.setString(1, orderId);
         return stm.executeQuery().next();
+    }
+
+    public boolean saveOrder(OrderDTO dto) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement stm = connection.prepareStatement("INSERT INTO `Orders` (oid, date, customerID) VALUES (?,?,?)");
+        stm.setString(1, dto.getOrderId());
+        stm.setDate(2, Date.valueOf(dto.getOrderDate()));
+        stm.setString(3, dto.getCustomerId());
+        return stm.executeUpdate()>0;
     }
 
 

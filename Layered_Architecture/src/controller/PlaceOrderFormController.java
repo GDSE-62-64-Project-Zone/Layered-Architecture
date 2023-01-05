@@ -320,6 +320,8 @@ public class PlaceOrderFormController {
         /*Transaction*/
         Connection connection = null;
         try {
+            connection=DBConnection.getDbConnection().getConnection();
+
             OrderDAOImpl orderDAO = new OrderDAOImpl();
             boolean b1 = orderDAO.existOrder(orderId);
             /*if order id already exist*/
@@ -328,6 +330,7 @@ public class PlaceOrderFormController {
             }
 
             connection.setAutoCommit(false);
+
             stm = connection.prepareStatement("INSERT INTO `Orders` (oid, date, customerID) VALUES (?,?,?)");
             stm.setString(1, orderId);
             stm.setDate(2, Date.valueOf(orderDate));
