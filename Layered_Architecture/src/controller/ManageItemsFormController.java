@@ -138,7 +138,7 @@ public class ManageItemsFormController {
 
             //Delete Customer
             ItemDAOImpl itemDAO = new ItemDAOImpl();
-            itemDAO.deleteCustomer(code);
+            itemDAO.deleteItem(code);
 
             tblItems.getItems().remove(tblItems.getSelectionModel().getSelectedItem());
             tblItems.getSelectionModel().clearSelection();
@@ -179,7 +179,7 @@ public class ManageItemsFormController {
                 }
                 //Save Item
                 ItemDAOImpl itemDAO = new ItemDAOImpl();
-                itemDAO.saveCustomer(new ItemDTO(code, description, unitPrice, qtyOnHand));
+                itemDAO.saveItem(new ItemDTO(code, description, unitPrice, qtyOnHand));
 
                 tblItems.getItems().add(new ItemTM(code, description, unitPrice, qtyOnHand));
 
@@ -196,7 +196,7 @@ public class ManageItemsFormController {
                 }
                 /*Update Item*/
                 ItemDAOImpl itemDAO = new ItemDAOImpl();
-                itemDAO.updateCustomer(new ItemDTO(code, description, unitPrice, qtyOnHand));
+                itemDAO.updateItem(new ItemDTO(code, description, unitPrice, qtyOnHand));
 
                 ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();
                 selectedItem.setDescription(description);
