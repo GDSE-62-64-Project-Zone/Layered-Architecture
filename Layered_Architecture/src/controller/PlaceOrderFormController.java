@@ -7,6 +7,7 @@ import com.sun.org.apache.xpath.internal.operations.Or;
 import dao.CustomerDAOImpl;
 import dao.ItemDAOImpl;
 import dao.OrderDAOImpl;
+import dao.OrderDetailsDAOImpl;
 import db.DBConnection;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -344,21 +345,18 @@ public class PlaceOrderFormController {
                 return false;
             }
 
-            stm = connection.prepareStatement("INSERT INTO OrderDetails (oid, itemCode, unitPrice, qty) VALUES (?,?,?,?)");
 
+            // add data to the Order Details table
+            OrderDetailsDAOImpl orderDetailsDAO = new OrderDetailsDAOImpl();
             for (OrderDetailDTO detail : orderDetails) {
-                stm.setString(1, orderId);
-                stm.setString(2, detail.getItemCode());
-                stm.setBigDecimal(3, detail.getUnitPrice());
-                stm.setInt(4, detail.getQty());
-
-                if (stm.executeUpdate() != 1) {
+                boolean b3 = orderDetailsDAO.saveOrderDetails(detail);
+                if (!b3) {
                     connection.rollback();
                     connection.setAutoCommit(true);
                     return false;
                 }
 
-//                //Search & Update Item
+               //Search & Update Item
                 ItemDTO item = findItem(detail.getItemCode());
                 item.setQtyOnHand(item.getQtyOnHand() - detail.getQty());
 
