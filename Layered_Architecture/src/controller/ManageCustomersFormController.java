@@ -71,22 +71,18 @@ public class ManageCustomersFormController {
 
     private void loadAllCustomers() {
         tblCustomers.getItems().clear();
-        /*Get all customers*/
         try {
-//
-        CustomerDAOImpl customerDAO = new CustomerDAOImpl();
-        ArrayList<CustomerDTO> allCustomers = customerDAO.getAllCustomers();
-        for (CustomerDTO c : allCustomers) {
-            tblCustomers.getItems().add(new CustomerTM(c.getId(),c.getName(),c.getAddress()));
-        }
-
+            /*Get all customers*/
+            CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+            ArrayList<CustomerDTO> allCustomers = customerDAO.getAllCustomers();
+            for (CustomerDTO c : allCustomers) {
+                tblCustomers.getItems().add(new CustomerTM(c.getId(), c.getName(), c.getAddress()));
+            }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         } catch (ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
-
-
     }
 
     private void initUI() {
@@ -148,12 +144,11 @@ public class ManageCustomersFormController {
                 if (existCustomer(id)) {
                     new Alert(Alert.AlertType.ERROR, id + " already exists").show();
                 }
-//                Connection connection = DBConnection.getDbConnection().getConnection();
-//                PreparedStatement pstm = connection.prepareStatement("INSERT INTO Customer (id,name, address) VALUES (?,?,?)");
-//                pstm.setString(1, id);
-//                pstm.setString(2, name);
-//                pstm.setString(3, address);
-//                pstm.executeUpdate();
+
+                //Add Customer
+                CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+                customerDAO.addCustomer(new CustomerDTO(id,name,address));
+
 
                 tblCustomers.getItems().add(new CustomerTM(id, name, address));
             } catch (SQLException e) {
@@ -169,12 +164,12 @@ public class ManageCustomersFormController {
                 if (!existCustomer(id)) {
                     new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
                 }
-//                Connection connection = DBConnection.getDbConnection().getConnection();
-//                PreparedStatement pstm = connection.prepareStatement("UPDATE Customer SET name=?, address=? WHERE id=?");
-//                pstm.setString(1, name);
-//                pstm.setString(2, address);
-//                pstm.setString(3, id);
-//                pstm.executeUpdate();
+
+                //Update Customer
+                CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+                customerDAO.updateCustomer(new CustomerDTO(id,name,address));
+
+
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, "Failed to update the customer " + id + e.getMessage()).show();
             } catch (ClassNotFoundException e) {
