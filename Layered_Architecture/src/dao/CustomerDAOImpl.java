@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class CustomerDAOImpl {
 
     public ArrayList<CustomerDTO> getAllCustomers() throws SQLException, ClassNotFoundException {
-        ArrayList<CustomerDTO> allCustomers= new ArrayList<>();
+        ArrayList<CustomerDTO> allCustomers = new ArrayList<>();
         Connection connection = DBConnection.getDbConnection().getConnection();
         Statement stm = connection.createStatement();
         ResultSet rst = stm.executeQuery("SELECT * FROM Customer");
@@ -29,7 +29,7 @@ public class CustomerDAOImpl {
         pstm.setString(1, dto.getId());
         pstm.setString(2, dto.getName());
         pstm.setString(3, dto.getAddress());
-       return pstm.executeUpdate()>0;
+        return pstm.executeUpdate() > 0;
     }
 
     public boolean updateCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException {
@@ -38,7 +38,7 @@ public class CustomerDAOImpl {
         pstm.setString(1, dto.getName());
         pstm.setString(2, dto.getAddress());
         pstm.setString(3, dto.getId());
-        return pstm.executeUpdate()>0;
+        return pstm.executeUpdate() > 0;
     }
 
     public boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
@@ -65,7 +65,17 @@ public class CustomerDAOImpl {
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connection.prepareStatement("DELETE FROM Customer WHERE id=?");
         pstm.setString(1, id);
-        return pstm.executeUpdate()>0;
+        return pstm.executeUpdate() > 0;
+    }
+
+
+    public CustomerDTO searchCustomer(String id) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer WHERE id=?");
+        pstm.setString(1, id + "");
+        ResultSet rst = pstm.executeQuery();
+        rst.next();
+        return new CustomerDTO(id + "", rst.getString("name"), rst.getString("address"));
     }
 
 }
