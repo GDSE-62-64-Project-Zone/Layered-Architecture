@@ -1,8 +1,7 @@
 package dao;
 
-import db.DBConnection;
+
 import model.ItemDTO;
-import view.tdm.ItemTM;
 
 import java.sql.*;
 import java.util.ArrayList;
