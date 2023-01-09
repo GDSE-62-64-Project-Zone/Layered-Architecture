@@ -57,10 +57,10 @@ public class PlaceOrderFormController {
     public Label lblTotal;
     private String orderId;
 
-    CrudDAO<OrderDTO> orderDAO = new OrderDAOImpl();
-    CrudDAO<CustomerDTO> customerDAO = new CustomerDAOImpl();
-    CrudDAO<ItemDTO> itemDAO = new ItemDAOImpl();
-    CrudDAO<OrderDetailDTO> orderDetailsDAO = new OrderDetailsDAOImpl();
+    OrderDAO orderDAO = new OrderDAOImpl();
+    CustomerDAO customerDAO = new CustomerDAOImpl();
+    ItemDAO itemDAO = new ItemDAOImpl();
+    OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAOImpl();
 
     public void initialize() throws SQLException, ClassNotFoundException {
 
@@ -298,7 +298,7 @@ public class PlaceOrderFormController {
 
     public void btnPlaceOrder_OnAction(ActionEvent actionEvent) {
         boolean b = saveOrder(orderId, LocalDate.now(), cmbCustomerId.getValue(),
-                tblOrderDetails.getItems().stream().map(tm -> new OrderDetailDTO(orderId,tm.getCode(), tm.getQty(), tm.getUnitPrice())).collect(Collectors.toList()));
+                tblOrderDetails.getItems().stream().map(tm -> new OrderDetailDTO(orderId, tm.getCode(), tm.getQty(), tm.getUnitPrice())).collect(Collectors.toList()));
 
         if (b) {
             new Alert(Alert.AlertType.INFORMATION, "Order has been placed successfully").show();
@@ -319,7 +319,7 @@ public class PlaceOrderFormController {
         /*Transaction*/
         Connection connection = null;
         try {
-            connection=DBConnection.getDbConnection().getConnection();
+            connection = DBConnection.getDbConnection().getConnection();
 
             //Check order id already exist or not
 
@@ -351,7 +351,7 @@ public class PlaceOrderFormController {
                     return false;
                 }
 
-               //Search & Update Item
+                //Search & Update Item
                 ItemDTO item = findItem(detail.getItemCode());
                 item.setQtyOnHand(item.getQtyOnHand() - detail.getQty());
 
