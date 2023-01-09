@@ -24,7 +24,7 @@ public class OrderDAOImpl implements CrudDAO<OrderDTO>{
 
     @Override
     public boolean exist(String id) throws SQLException, ClassNotFoundException {
-        ResultSet rst = SQLUtil.execute("SELECT oid FROM `Orders` WHERE oid=?",orderId);
+        ResultSet rst = SQLUtil.execute("SELECT oid FROM `Orders` WHERE oid=?",id);
         return rst.next();
     }
 
