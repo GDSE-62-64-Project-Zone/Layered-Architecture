@@ -7,7 +7,7 @@ import model.ItemDTO;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ItemDAOImpl implements CrudDAO<ItemDTO> {
+public class ItemDAOImpl implements ItemDAO {
 
     @Override
     public ArrayList<ItemDTO> getAll() throws SQLException, ClassNotFoundException {
