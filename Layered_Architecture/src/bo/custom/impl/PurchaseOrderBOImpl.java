@@ -1,5 +1,6 @@
-package bo;
+package bo.custom.impl;
 
+import bo.custom.PurchaseOrderBO;
 import dao.custom.CustomerDAO;
 import dao.custom.ItemDAO;
 import dao.custom.OrderDAO;
@@ -20,7 +21,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchaseOrderBOImpl implements PurchaseOrderBO{
+public class PurchaseOrderBOImpl implements PurchaseOrderBO {
 
     @Override
     public CustomerDTO searchCustomer(String id) throws SQLException, ClassNotFoundException {
