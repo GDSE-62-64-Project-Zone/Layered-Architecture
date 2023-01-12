@@ -43,6 +43,7 @@ public class ManageCustomersFormController {
     public TableView<CustomerTM> tblCustomers;
     public JFXButton btnAddNewCustomer;
 
+    CustomerBO customerBO = new CustomerBOImpl();
 
     public void initialize() {
         tblCustomers.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -75,7 +76,6 @@ public class ManageCustomersFormController {
         tblCustomers.getItems().clear();
         try {
             /*Get all customers*/
-            CustomerBO customerBO = new CustomerBOImpl();
             ArrayList<CustomerDTO> allCustomers = customerBO.getAllCustomers();
 
             for (CustomerDTO c : allCustomers) {
@@ -149,7 +149,6 @@ public class ManageCustomersFormController {
                 }
 
                 //Add Customer
-                CustomerBO customerBO = new CustomerBOImpl();
                 customerBO.addCustomer(new CustomerDTO(id,name,address));
 
                 tblCustomers.getItems().add(new CustomerTM(id, name, address));
@@ -168,7 +167,6 @@ public class ManageCustomersFormController {
                 }
 
                 //Update Customer
-                CustomerBO customerBO = new CustomerBOImpl();
                 customerBO.updateCustomer(new CustomerDTO(id,name,address));
 
             } catch (SQLException e) {
@@ -188,7 +186,6 @@ public class ManageCustomersFormController {
 
 
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        CustomerBO customerBO = new CustomerBOImpl();
         return customerBO.existCustomer(id);
     }
 
@@ -202,7 +199,6 @@ public class ManageCustomersFormController {
             }
 
             //Delete Customer
-            CustomerBO customerBO = new CustomerBOImpl();
             customerBO.deleteCustomer(id);
 
             tblCustomers.getItems().remove(tblCustomers.getSelectionModel().getSelectedItem());
@@ -219,7 +215,6 @@ public class ManageCustomersFormController {
     private String generateNewId() {
         try {
             //Generate New ID
-            CustomerBO customerBO = new CustomerBOImpl();
             return customerBO.generateNewCustomerID();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new id " + e.getMessage()).show();
