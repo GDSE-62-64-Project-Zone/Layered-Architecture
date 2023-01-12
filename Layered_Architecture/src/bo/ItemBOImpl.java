@@ -12,4 +12,29 @@ public class ItemBOImpl {
         ItemDAO itemDAO = new ItemDAOImpl();
        return itemDAO.getAll();
     }
+
+    public boolean deleteItem(String code) throws SQLException, ClassNotFoundException {
+        ItemDAO itemDAO = new ItemDAOImpl();
+        return itemDAO.delete(code);
+    }
+
+    public boolean saveItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
+        ItemDAO itemDAO = new ItemDAOImpl();
+        return itemDAO.add(dto);
+    }
+
+    public boolean updateItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
+        ItemDAO itemDAO = new ItemDAOImpl();
+        return itemDAO.update(dto);
+    }
+
+    public boolean existItem(String code) throws SQLException, ClassNotFoundException {
+        ItemDAO itemDAO = new ItemDAOImpl();
+        return itemDAO.exist(code);
+    }
+
+    public String generateNewCode() throws SQLException, ClassNotFoundException {
+        ItemDAO itemDAO = new ItemDAOImpl();
+        return itemDAO.generateNewID();
+    }
 }
