@@ -67,12 +67,9 @@ public class PurchaseOrderBOImpl implements PurchaseOrderBO {
 
     @Override
     public boolean purchaseOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails){
-        /*Transaction*/
         Connection connection = null;
         try {
             connection = DBConnection.getDbConnection().getConnection();
-            //Check order id already exist or not
-
             boolean b1 = orderDAO.exist(orderId);
             /*if order id already exist*/
             if (b1) {
@@ -82,14 +79,11 @@ public class PurchaseOrderBOImpl implements PurchaseOrderBO {
             connection.setAutoCommit(false);
             //Save the Order to the order table
             boolean b2 = orderDAO.add(new OrderDTO(orderId, orderDate, customerId));
-
             if (!b2) {
                 connection.rollback();
                 connection.setAutoCommit(true);
                 return false;
             }
-
-            // add data to the Order Details table
 
             for (OrderDetailDTO detail : orderDetails) {
                 boolean b3 = orderDetailsDAO.add(detail);
