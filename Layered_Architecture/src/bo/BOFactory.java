@@ -16,16 +16,33 @@ public class BOFactory {
         return (boFactory==null)? boFactory=new BOFactory() : boFactory;
     }
     //Object creation logic for CustomerBO
-    public CustomerBO getCustomerBO(){
-        return new CustomerBOImpl();
+//    public CustomerBO getCustomerBO(){
+//        return new CustomerBOImpl();
+//    }
+//
+//    public ItemBO getItemBO(){
+//        return new ItemBOImpl();
+//    }
+//
+//    public PurchaseOrderBO getPurchaseOrderBO(){
+//        return new PurchaseOrderBOImpl();
+//    }
+
+    public enum BOTypes{
+        CUSTOMER,ITEM,PO
     }
 
-    public ItemBO getItemBO(){
-        return new ItemBOImpl();
-    }
-
-    public PurchaseOrderBO getPurchaseOrderBO(){
-        return new PurchaseOrderBOImpl();
+    public SuperBO getBO(BOTypes types){
+        switch (types){
+            case CUSTOMER:
+                return new CustomerBOImpl();
+            case ITEM:
+                return new ItemBOImpl();
+            case PO:
+                return new PurchaseOrderBOImpl();
+            default:
+                return null;
+        }
     }
 
 
