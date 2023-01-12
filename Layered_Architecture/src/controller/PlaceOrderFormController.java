@@ -1,5 +1,6 @@
 package controller;
 
+import bo.PurchaseOrderBO;
 import bo.PurchaseOrderBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -116,7 +117,7 @@ public class PlaceOrderFormController {
                             new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + newValue + "").show();
                         }
                         //Search Customer
-                        PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
+                        PurchaseOrderBO purchaseOrderBO = new PurchaseOrderBOImpl();
                         CustomerDTO customerDTO = purchaseOrderBO.searchCustomer(newValue + "");
                         txtCustomerName.setText(customerDTO.getName());
 
@@ -145,7 +146,7 @@ public class PlaceOrderFormController {
                     }
 
                     //Search Item
-                    PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
+                    PurchaseOrderBO purchaseOrderBO = new PurchaseOrderBOImpl();
                     ItemDTO item = purchaseOrderBO.searchItem(newItemCode + "");
 
                     txtDescription.setText(item.getDescription());
@@ -191,18 +192,18 @@ public class PlaceOrderFormController {
     }
 
     private boolean existItem(String code) throws SQLException, ClassNotFoundException {
-        PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
+        PurchaseOrderBO purchaseOrderBO = new PurchaseOrderBOImpl();
         return purchaseOrderBO.existItem(code);
     }
 
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
+        PurchaseOrderBO purchaseOrderBO = new PurchaseOrderBOImpl();
         return purchaseOrderBO.existCustomer(id);
     }
 
     public String generateNewOrderId() {
         try {
-            PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
+            PurchaseOrderBO purchaseOrderBO = new PurchaseOrderBOImpl();
             return purchaseOrderBO.generateOrderID();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new order id").show();
@@ -214,7 +215,7 @@ public class PlaceOrderFormController {
 
     private void loadAllCustomerIds() {
         try {
-            PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
+            PurchaseOrderBO purchaseOrderBO = new PurchaseOrderBOImpl();
             ArrayList<CustomerDTO> allCustomers = purchaseOrderBO.getAllCustomers();
             for (CustomerDTO c : allCustomers) {
                 cmbCustomerId.getItems().add(c.getId());
@@ -229,7 +230,7 @@ public class PlaceOrderFormController {
     private void loadAllItemCodes() {
         try {
             /*Get all items*/
-            PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
+            PurchaseOrderBO purchaseOrderBO = new PurchaseOrderBOImpl();
             ArrayList<ItemDTO> allItems = purchaseOrderBO.getAllItems();
             for (ItemDTO i : allItems) {
                 cmbItemCode.getItems().add(i.getCode());
@@ -328,7 +329,7 @@ public class PlaceOrderFormController {
     }
 
     public boolean saveOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails) {
-        PurchaseOrderBOImpl purchaseOrderBO = new PurchaseOrderBOImpl();
+        PurchaseOrderBO purchaseOrderBO = new PurchaseOrderBOImpl();
         return purchaseOrderBO.purchaseOrder(orderId, orderDate, customerId, orderDetails);
     }
 
