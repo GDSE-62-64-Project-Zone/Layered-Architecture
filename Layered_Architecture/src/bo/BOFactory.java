@@ -15,23 +15,12 @@ public class BOFactory {
     public static BOFactory getBoFactory(){
         return (boFactory==null)? boFactory=new BOFactory() : boFactory;
     }
-    //Object creation logic for CustomerBO
-//    public CustomerBO getCustomerBO(){
-//        return new CustomerBOImpl();
-//    }
-//
-//    public ItemBO getItemBO(){
-//        return new ItemBOImpl();
-//    }
-//
-//    public PurchaseOrderBO getPurchaseOrderBO(){
-//        return new PurchaseOrderBOImpl();
-//    }
 
     public enum BOTypes{
         CUSTOMER,ITEM,PO
     }
 
+    //Object creation logic for BO objects
     public SuperBO getBO(BOTypes types){
         switch (types){
             case CUSTOMER:
@@ -44,6 +33,5 @@ public class BOFactory {
                 return null;
         }
     }
-
 
 }
