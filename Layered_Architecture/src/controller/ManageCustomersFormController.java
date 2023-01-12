@@ -1,5 +1,6 @@
 package controller;
 
+import bo.CustomerBO;
 import bo.CustomerBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -74,7 +75,7 @@ public class ManageCustomersFormController {
         tblCustomers.getItems().clear();
         try {
             /*Get all customers*/
-            CustomerBOImpl customerBO = new CustomerBOImpl();
+            CustomerBO customerBO = new CustomerBOImpl();
             ArrayList<CustomerDTO> allCustomers = customerBO.getAllCustomers();
 
             for (CustomerDTO c : allCustomers) {
@@ -148,7 +149,7 @@ public class ManageCustomersFormController {
                 }
 
                 //Add Customer
-                CustomerBOImpl customerBO = new CustomerBOImpl();
+                CustomerBO customerBO = new CustomerBOImpl();
                 customerBO.addCustomer(new CustomerDTO(id,name,address));
 
                 tblCustomers.getItems().add(new CustomerTM(id, name, address));
@@ -167,7 +168,7 @@ public class ManageCustomersFormController {
                 }
 
                 //Update Customer
-                CustomerBOImpl customerBO = new CustomerBOImpl();
+                CustomerBO customerBO = new CustomerBOImpl();
                 customerBO.updateCustomer(new CustomerDTO(id,name,address));
 
             } catch (SQLException e) {
@@ -187,7 +188,7 @@ public class ManageCustomersFormController {
 
 
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        CustomerBOImpl customerBO = new CustomerBOImpl();
+        CustomerBO customerBO = new CustomerBOImpl();
         return customerBO.existCustomer(id);
     }
 
@@ -201,7 +202,7 @@ public class ManageCustomersFormController {
             }
 
             //Delete Customer
-            CustomerBOImpl customerBO = new CustomerBOImpl();
+            CustomerBO customerBO = new CustomerBOImpl();
             customerBO.deleteCustomer(id);
 
             tblCustomers.getItems().remove(tblCustomers.getSelectionModel().getSelectedItem());
@@ -218,7 +219,7 @@ public class ManageCustomersFormController {
     private String generateNewId() {
         try {
             //Generate New ID
-            CustomerBOImpl customerBO = new CustomerBOImpl();
+            CustomerBO customerBO = new CustomerBOImpl();
             return customerBO.generateNewCustomerID();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new id " + e.getMessage()).show();
