@@ -42,8 +42,6 @@ public class ManageCustomersFormController {
     public TableView<CustomerTM> tblCustomers;
     public JFXButton btnAddNewCustomer;
 
-    //DI (Property Injection)
-//   CustomerDAO customerDAO = new CustomerDAO Impl();
 
     public void initialize() {
         tblCustomers.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -169,7 +167,8 @@ public class ManageCustomersFormController {
                 }
 
                 //Update Customer
-                customerDAO.update(new CustomerDTO(id,name,address));
+                CustomerBOImpl customerBO = new CustomerBOImpl();
+                customerBO.updateCustomer(new CustomerDTO(id,name,address));
 
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, "Failed to update the customer " + id + e.getMessage()).show();
@@ -188,7 +187,8 @@ public class ManageCustomersFormController {
 
 
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-       return customerDAO.exist(id);
+        CustomerBOImpl customerBO = new CustomerBOImpl();
+        return customerBO.existCustomer(id);
     }
 
 
@@ -201,7 +201,8 @@ public class ManageCustomersFormController {
             }
 
             //Delete Customer
-            customerDAO.delete(id);
+            CustomerBOImpl customerBO = new CustomerBOImpl();
+            customerBO.deleteCustomer(id);
 
             tblCustomers.getItems().remove(tblCustomers.getSelectionModel().getSelectedItem());
             tblCustomers.getSelectionModel().clearSelection();
@@ -217,7 +218,8 @@ public class ManageCustomersFormController {
     private String generateNewId() {
         try {
             //Generate New ID
-            return customerDAO.generateNewID();
+            CustomerBOImpl customerBO = new CustomerBOImpl();
+            return customerBO.generateNewCustomerID();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new id " + e.getMessage()).show();
         } catch (ClassNotFoundException e) {
