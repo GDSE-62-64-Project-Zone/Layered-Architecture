@@ -150,7 +150,8 @@ public class ManageCustomersFormController {
                 }
 
                 //Add Customer
-                customerDAO.add(new CustomerDTO(id,name,address));
+                CustomerBOImpl customerBO = new CustomerBOImpl();
+                customerBO.addCustomer(new CustomerDTO(id,name,address));
 
                 tblCustomers.getItems().add(new CustomerTM(id, name, address));
             } catch (SQLException e) {

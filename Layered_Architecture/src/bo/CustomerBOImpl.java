@@ -13,4 +13,9 @@ public class CustomerBOImpl {
         CustomerDAO customerDAO = new CustomerDAOImpl();
        return customerDAO.getAll();
     }
+
+    public boolean addCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException {
+        CustomerDAO customerDAO = new CustomerDAOImpl();
+        return customerDAO.add(dto);
+    }
 }
