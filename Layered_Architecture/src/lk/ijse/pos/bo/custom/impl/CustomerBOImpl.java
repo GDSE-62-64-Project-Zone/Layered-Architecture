@@ -4,7 +4,7 @@ import lk.ijse.pos.bo.custom.CustomerBO;
 import lk.ijse.pos.dao.DAOFactory;
 import lk.ijse.pos.dao.custom.CustomerDAO;
 import lk.ijse.pos.entity.Customer;
-import lk.ijse.pos.model.CustomerDTO;
+import lk.ijse.pos.dto.CustomerDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

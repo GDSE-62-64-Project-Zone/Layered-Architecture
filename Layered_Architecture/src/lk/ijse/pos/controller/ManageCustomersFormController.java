@@ -16,7 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.pos.model.CustomerDTO;
+import lk.ijse.pos.dto.CustomerDTO;
 import lk.ijse.pos.view.tdm.CustomerTM;
 
 import java.io.IOException;

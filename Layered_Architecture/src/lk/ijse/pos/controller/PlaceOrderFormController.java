@@ -17,10 +17,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.pos.model.CustomerDTO;
-import lk.ijse.pos.model.ItemDTO;
-import lk.ijse.pos.model.OrderDTO;
-import lk.ijse.pos.model.OrderDetailDTO;
+import lk.ijse.pos.dto.CustomerDTO;
+import lk.ijse.pos.dto.ItemDTO;
+import lk.ijse.pos.dto.OrderDTO;
+import lk.ijse.pos.dto.OrderDetailDTO;
 import lk.ijse.pos.view.tdm.OrderDetailTM;
 
 import java.io.IOException;

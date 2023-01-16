@@ -11,10 +11,10 @@ import lk.ijse.pos.entity.Customer;
 import lk.ijse.pos.entity.Item;
 import lk.ijse.pos.entity.OrderDetails;
 import lk.ijse.pos.entity.Orders;
-import lk.ijse.pos.model.CustomerDTO;
-import lk.ijse.pos.model.ItemDTO;
-import lk.ijse.pos.model.OrderDTO;
-import lk.ijse.pos.model.OrderDetailDTO;
+import lk.ijse.pos.dto.CustomerDTO;
+import lk.ijse.pos.dto.ItemDTO;
+import lk.ijse.pos.dto.OrderDTO;
+import lk.ijse.pos.dto.OrderDetailDTO;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -1,7 +1,7 @@
 package lk.ijse.pos.bo.custom;
 
 import lk.ijse.pos.bo.SuperBO;
-import lk.ijse.pos.model.CustomerDTO;
+import lk.ijse.pos.dto.CustomerDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
