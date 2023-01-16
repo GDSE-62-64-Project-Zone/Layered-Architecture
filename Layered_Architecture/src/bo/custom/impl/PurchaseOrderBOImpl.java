@@ -7,6 +7,8 @@ import dao.custom.ItemDAO;
 import dao.custom.OrderDAO;
 import dao.custom.OrderDetailsDAO;
 import db.DBConnection;
+import entity.Customer;
+import entity.Item;
 import model.CustomerDTO;
 import model.ItemDTO;
 import model.OrderDTO;
@@ -27,13 +29,15 @@ public class PurchaseOrderBOImpl implements PurchaseOrderBO {
 
     @Override
     public CustomerDTO searchCustomer(String id) throws SQLException, ClassNotFoundException {
-        return customerDAO.search(id);
+        Customer c = customerDAO.search(id);
+        return new CustomerDTO(c.getId(),c.getName(),c.getAddress());
     }
 
 
     @Override
     public ItemDTO searchItem(String code) throws SQLException, ClassNotFoundException {
-        return itemDAO.search(code);
+        Item i = itemDAO.search(code);
+        return new ItemDTO(i.getCode(),i.getDescription(),i.getUnitPrice(),i.getQtyOnHand());
     }
 
     @Override
