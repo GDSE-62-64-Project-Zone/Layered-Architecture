@@ -57,12 +57,22 @@ public class PurchaseOrderBOImpl implements PurchaseOrderBO {
 
     @Override
     public ArrayList<CustomerDTO> getAllCustomers() throws SQLException, ClassNotFoundException {
-       return customerDAO.getAll();
+        ArrayList<Customer> customerEntityData = customerDAO.getAll();
+        ArrayList<CustomerDTO> convertToDto= new ArrayList<>();
+        for (Customer c : customerEntityData) {
+            convertToDto.add(new CustomerDTO(c.getId(),c.getName(),c.getAddress()));
+        }
+       return convertToDto;
     }
 
     @Override
     public ArrayList<ItemDTO> getAllItems() throws SQLException, ClassNotFoundException {
-        return itemDAO.getAll();
+        ArrayList<Item> entityTypeData = itemDAO.getAll();
+        ArrayList<ItemDTO> dtoTypeData= new ArrayList<>();
+        for (Item i : entityTypeData) {
+            dtoTypeData.add(new ItemDTO(i.getCode(),i.getDescription(),i.getUnitPrice(),i.getQtyOnHand()));
+        }
+        return dtoTypeData;
     }
 
 
