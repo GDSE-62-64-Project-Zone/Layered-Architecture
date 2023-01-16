@@ -2,6 +2,7 @@ package dao.custom.impl;
 
 import dao.SQLUtil;
 import dao.custom.OrderDetailsDAO;
+import entity.OrderDetails;
 import model.OrderDetailDTO;
 
 import java.sql.SQLException;
@@ -11,37 +12,37 @@ public class OrderDetailsDAOImpl implements OrderDetailsDAO {
 
 
     @Override
-    public ArrayList<OrderDetailDTO> getAll() throws SQLException, ClassNotFoundException {
-        return null;
+    public ArrayList<OrderDetails> getAll() throws SQLException, ClassNotFoundException {
+       throw new UnsupportedOperationException("This feature is not implemented yet");
     }
 
     @Override
-    public boolean add(OrderDetailDTO dto) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("INSERT INTO OrderDetails (oid, itemCode, unitPrice, qty) VALUES (?,?,?,?)", dto.getOid(), dto.getItemCode(), dto.getUnitPrice(), dto.getQty());
+    public boolean add(OrderDetails entity) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("INSERT INTO OrderDetails (oid, itemCode, unitPrice, qty) VALUES (?,?,?,?)", entity.getOid(), entity.getItemCode(), entity.getUnitPrice(), entity.getQty());
     }
 
     @Override
-    public boolean update(OrderDetailDTO dto) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean update(OrderDetails entity) throws SQLException, ClassNotFoundException {
+        throw new UnsupportedOperationException("This feature is not implemented yet");
     }
 
     @Override
     public boolean exist(String id) throws SQLException, ClassNotFoundException {
-        return false;
+        throw new UnsupportedOperationException("This feature is not implemented yet");
     }
 
     @Override
     public String generateNewID() throws SQLException, ClassNotFoundException {
-        return null;
+        throw new UnsupportedOperationException("This feature is not implemented yet");
     }
 
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return false;
+        throw new UnsupportedOperationException("This feature is not implemented yet");
     }
 
     @Override
-    public OrderDetailDTO search(String id) throws SQLException, ClassNotFoundException {
-        return null;
+    public OrderDetails search(String id) throws SQLException, ClassNotFoundException {
+        throw new UnsupportedOperationException("This feature is not implemented yet");
     }
 }

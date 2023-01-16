@@ -17,12 +17,12 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public boolean add(Orders dto) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("INSERT INTO `Orders` (oid, date, customerID) VALUES (?,?,?)",dto.getOrderId(),Date.valueOf(dto.getOrderDate()),dto.getCustomerId());
+    public boolean add(Orders entity) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("INSERT INTO `Orders` (oid, date, customerID) VALUES (?,?,?)",entity.getOid(),Date.valueOf(entity.getDate()),entity.getCustomerID());
     }
 
     @Override
-    public boolean update(Orders dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Orders entity) throws SQLException, ClassNotFoundException {
         throw new UnsupportedOperationException("This Feature is not implemented yet");
     }
 
