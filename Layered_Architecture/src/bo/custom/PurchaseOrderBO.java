@@ -36,8 +36,8 @@ public interface PurchaseOrderBO extends SuperBO {
 
     public ArrayList<ItemDTO> getAllItems() throws SQLException, ClassNotFoundException;
 
-    public boolean purchaseOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails);
+    public boolean purchaseOrder(OrderDTO dto)throws SQLException, ClassNotFoundException;
 
-    public ItemDTO findItem(String code);
+    public ItemDTO findItem(String code)throws SQLException, ClassNotFoundException;
 }
 
