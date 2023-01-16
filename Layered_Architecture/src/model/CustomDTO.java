@@ -1,9 +1,9 @@
-package entity;
+package model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class CustomEntity {
+public class CustomDTO {
     //customer
     private String id;
     private String name;
@@ -24,10 +24,11 @@ public class CustomEntity {
     private String itemCode;
     private int qty;
 
-    public CustomEntity() {
+
+    public CustomDTO() {
     }
 
-    public CustomEntity(String oid, LocalDate date, String customerID, String itemCode, int qty, BigDecimal unitPrice) {
+    public CustomDTO(BigDecimal unitPrice, String oid, LocalDate date, String customerID, String itemCode, int qty) {
         this.unitPrice = unitPrice;
         this.oid = oid;
         this.date = date;
@@ -35,6 +36,7 @@ public class CustomEntity {
         this.itemCode = itemCode;
         this.qty = qty;
     }
+
 
     public String getId() {
         return id;
