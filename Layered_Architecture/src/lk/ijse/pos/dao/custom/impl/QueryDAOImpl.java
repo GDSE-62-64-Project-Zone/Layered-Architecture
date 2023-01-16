@@ -23,7 +23,7 @@ public class QueryDAOImpl implements QueryDAO {
             int qty = rst.getInt("qty");
             BigDecimal unitPrice = rst.getBigDecimal("unitPrice");
 
-            CustomEntity customEntity = new CustomEntity(oid1, LocalDate.now(), customerID, itemCode, qty, unitPrice);
+            CustomEntity customEntity = new CustomEntity(oid1, LocalDate.parse(date), customerID, itemCode, qty, unitPrice);
             allRecords.add(customEntity);
         }
         return allRecords;
