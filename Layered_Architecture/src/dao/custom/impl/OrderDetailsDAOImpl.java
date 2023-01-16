@@ -3,7 +3,6 @@ package dao.custom.impl;
 import dao.SQLUtil;
 import dao.custom.OrderDetailsDAO;
 import entity.OrderDetails;
-import model.OrderDetailDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
