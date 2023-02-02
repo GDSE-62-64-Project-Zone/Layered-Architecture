@@ -24,5 +24,7 @@ public class AppInitializer extends Application {
         primaryStage.setTitle("Java FX POS");
         primaryStage.centerOnScreen();
         primaryStage.show();
+
+        //https://drive.google.com/file/d/1cJJO9RkJTRq_bN2cnuPao7oBVUp_n3Jn/view?usp=sharing
     }
 }
